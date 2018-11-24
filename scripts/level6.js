@@ -1,0 +1,110 @@
+function level6 () {
+if (level===6) {
+		steveRow = 4;
+		steveColumn = 5;
+
+		steveLeft = sLeft+steveColumn*40;
+		steveTop = steveRow*40+10-40;
+
+		boxRow = 3;
+		boxColumn = 4;
+
+		boxLeft = sLeft+boxColumn*40;
+		boxTop = boxRow*40-40;
+
+		box2Row = 3;
+		box2Column =8;
+
+		box2Left = sLeft+box2Column*40;
+		box2Top = box2Row*40-40;
+
+		box3Row = 4;
+		box3Column = 7;
+
+		box3Left = sLeft+box3Column*40;
+		box3Top = box3Row*40-40;
+
+		box4Row = 4;
+		box4Column = 9;
+
+		box4Left = sLeft+box4Column*40;
+		box4Top = box4Row*40-40;
+
+		exitRow = 5;
+		exitColumn = 2;
+
+		row[1][2]='brick';
+		row[1][3]='brick';
+		row[1][4]='brick';
+		row[1][5]='brick';
+		row[1][6]='brick';
+		row[1][7]='brick';
+		row[1][8]='brick';
+		row[1][9]='brick';
+
+		row[2][1]='brick';
+		row[2][2]='brick';
+		row[2][3]='stone';
+		row[2][4]='stone';
+		row[2][5]='brick';
+		row[2][6]='stone';
+		row[2][7]='stone';
+		row[2][8]='brick';
+		row[2][9]='brick';
+		row[2][10]='brick';
+
+		row[3][1]='brick';
+		row[3][2]='brick';
+		row[3][3]='place';
+		row[3][4]='stone';
+		row[3][5]='brick';
+		row[3][6]='stone';
+		row[3][7]='stone';
+		row[3][8]='place';
+		row[3][9]='stone';
+		row[3][10]='brick';
+		row[3][11]='brick';
+
+		row[4][1]='brick';
+		row[4][2]='stone';
+		row[4][3]='stone';
+		row[4][4]='stone';
+		row[4][5]='stone';
+		row[4][6]='stone';
+		row[4][7]='place';
+		row[4][8]='stone';
+		row[4][9]='place';
+		row[4][10]='stone';
+		row[4][11]='brick';
+
+		row[5][1]='brick';
+		row[5][2]='stone';
+		row[5][3]='stone';
+		row[5][4]='stone';
+		row[5][5]='brick';
+		row[5][6]='brick';
+		row[5][7]='stone';
+		row[5][8]='stone';
+		row[5][9]='stone';
+		row[5][10]='stone';
+		row[5][11]='brick';
+
+		row[6][1]='brick';
+		row[6][2]='brick';
+		row[6][3]='brick';
+		row[6][4]='brick';
+		row[6][5]='brick';
+		row[6][6]='brick';
+		row[6][7]='stone';
+		row[6][8]='stone';
+		row[6][9]='stone';
+		row[6][10]='brick';
+		row[6][11]='brick';
+
+		row[7][6]='brick';
+		row[7][7]='brick';
+		row[7][8]='brick';
+		row[7][9]='brick';
+		row[7][10]='brick';
+	}
+};

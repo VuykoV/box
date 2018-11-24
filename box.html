@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>box</title>
+	<link href="styles/css.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="scripts/level1.js"></script>
+	<script src="scripts/level2.js"></script>
+	<script src="scripts/level3.js"></script>
+	<script src="scripts/level4.js"></script>
+	<script src="scripts/level5.js"></script>
+	<script src="scripts/level6.js"></script>
+	<script src="scripts/level7.js"></script>
+	<script src="scripts/level8.js"></script>
+</head>
+<body>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col col-lg">
+    	<center>
+    	<button id="circle" class="btn btn-info button-image-music"></button>
+		<button id="NightSky" class="btn btn-info button-image-music"></button>
+		<button id="minecraft" class="btn btn-info button-image-music"></button>
+		</center>
+    </div>
+    <div class="col col-lg-10">
+		<center>
+			<field></field>
+		</center>
+    </div>
+    <div class="col col-lg">
+    	<center>
+		<button class="btn btn-info button-image-music" id="level1">1</button>
+		<button class="btn btn-info button-image-music" id="level2">2</button>
+		<button class="btn btn-info button-image-music" id="level3">3</button>
+		<button class="btn btn-info button-image-music" id="level4">4</button>
+		<button class="btn btn-info button-image-music" id="level5">5</button>
+		<button class="btn btn-info button-image-music" id="level6">6</button>
+		<button class="btn btn-info button-image-music" id="level7">7</button>
+		<button class="btn btn-info button-image-music" id="level8">8</button>
+		</center>
+    </div>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+if (localStorage.getItem('background')==='1') {
+	circle();
+} else if (localStorage.getItem('background')==='2') {
+	nightSky();
+} else if (localStorage.getItem('background')==='3') {
+	minecraft();
+}
+let level = 1;
+
+const sLeft = 200;
+const sTop = 100;
+
+let row=[];
+row[1]=[];
+row[2]=[];
+row[3]=[];
+row[4]=[];
+row[5]=[];
+row[6]=[];
+row[7]=[];
+row[8]=[];
+row[9]=[];
+row[10]=[];
+
+let steveRow = 0;
+let steveColumn = 0;
+
+let steveLeft = 0;
+let steveTop = 0;
+
+let boxRow =0;
+let boxColumn = 0;
+
+let boxLeft = 0;
+let boxTop = 0;
+
+let exitRow = 0;
+let exitColumn = 0;
+
+let box2Row = null;
+let box2Column = 0;
+
+let box2Left = 0;
+let box2Top = 0;
+
+let box3Row = null;
+let box3Column = 0;
+
+let box3Left = 0;
+let box3Top = 0;
+
+let box4Row = null;
+let box4Column = 0;
+
+let box4Left = 0;
+let box4Top = 0;
+
+function setParameters () {
+	level1();
+	level2();
+	level3();
+	level4();
+	level5();
+	level6();
+	level7();
+	level8();
+}
+
+function clearData () {
+	for (i=1; i<=15; i++) {
+		row[1][i]=null;
+		row[2][i]=null;
+		row[3][i]=null;
+		row[4][i]=null;
+		row[5][i]=null;
+		row[6][i]=null;
+		row[7][i]=null;
+		row[8][i]=null;
+		row[9][i]=null;
+		row[10][i]=null;
+	}
+	box2Row=null;
+	box3Row=null;
+	box4Row=null;
+}
+
+function startNewLevel() {
+
+	$('img').remove();
+	clearData();
+	setParameters();
+	renderField();
+	boxOnPlace();
+}
+
+startNewLevel();
+
+function renderField () {
+	$('field').append('<img src="images/steve.png" width="40px" id="steve" style="left: '+steveLeft+'px; top: '+steveTop+'px;"></img>');
+	$('field').append('<img src="images/WoodPlanks.jpg" width="40px" style="left: '+boxLeft+'px; top: '+boxTop+'px; z-index: 100;" id="box"></img>');
+
+	if (box2Row) {
+		$('field').append('<img src="images/WoodPlanks.jpg" width="40px" style="left: '+box2Left+'px; top: '+box2Top+'px; z-index: 100;" id="box2"></img>');
+	}
+
+	if (box3Row) {
+		$('field').append('<img src="images/WoodPlanks.jpg" width="40px" style="left: '+box3Left+'px; top: '+box3Top+'px; z-index: 100;" id="box3"></img>');
+	}
+
+	if (box4Row) {
+		$('field').append('<img src="images/WoodPlanks.jpg" width="40px" style="left: '+box4Left+'px; top: '+box4Top+'px; z-index: 100;" id="box4"></img>');
+	}
+	for (i=1; i<=15; i++) {
+		let rowleft =sLeft+i*40;
+		for (y=1; y<=10; y++) {
+			if (row[y][i]) {
+				$('field').append('<img src="images/'+row[y][i]+'.jpg" width="40px" height="40px" style="left: '+rowleft+'px; top: '+(y-1)*40+'px;" column="'+i+'" row="'+y+'"></img>');
+			}
+		}
+	}
+}
+  $("#circle").click(function(){
+  	localStorage.setItem('background', 1);
+  	circle();
+  });
+
+function circle () {
+	$('body').css('background-image', 'url(https://staticmobly.akamaized.net/p/Arte-Quadro-Papel-de-Parede-3D-CC3ADrculos-EntrelaC3A7ados-Autocolante-6524-782364-1-zoom.jpg)');
+	$('body').css('background-size', 'auto');
+}
+
+$("#NightSky").click(function(){
+	localStorage.setItem('background', 2);
+	nightSky();
+  });
+
+function nightSky () {
+	$('body').css('background-image', 'url(https://cdn.pixabay.com/photo/2017/08/24/03/41/milky-way-2675322_960_720.jpg)');
+	$('body').css('background-size', 'cover');
+}
+
+	$("#minecraft").click(function(){
+	localStorage.setItem('background', 3);
+	minecraft();
+  });
+
+function minecraft () {
+	$('body').css('background-image', 'url(https://minecraftonly.ru/uploads/posts/2016-05/1463658227_1.jpg)');
+	$('body').css('background-size', 'cover');
+}
+
+$(document).keyup(function(e){
+	//left
+	if (e.which == 37 || e.which == 65) {
+		if (boxRow===steveRow && boxColumn===steveColumn-1) {
+			if (row[steveRow][steveColumn-2]==='brick') {return;}
+			if (boxRow===box2Row && boxColumn-1===box2Column) {return;}
+			if (boxRow===box3Row && boxColumn-1===box3Column) {return;}
+			if (boxRow===box4Row && boxColumn-1===box4Column) {return;}
+			boxColumn--;
+			$('#box').animate({left: boxLeft=sLeft+boxColumn*40}, 200)
+		}
+		if (box2Row===steveRow && box2Column===steveColumn-1) {
+			if (row[steveRow][steveColumn-2]==='brick') {return;}
+			if (boxRow===box2Row && boxColumn===box2Column-1) {return;}
+			if (box3Row===box2Row && box3Column===box2Column-1) {return;}
+			if (box4Row===box2Row && box4Column===box2Column-1) {return;}
+			box2Column--;
+			$('#box2').animate({left: box2Left=sLeft+box2Column*40}, 200)
+		}
+		if (box3Row===steveRow && box3Column===steveColumn-1) {
+			if (row[steveRow][steveColumn-2]==='brick') {return;}
+			if (boxRow===box3Row && boxColumn===box3Column-1) {return;}
+			if (box2Row===box3Row && box2Column===box3Column-1) {return;}
+			if (box4Row===box3Row && box4Column===box3Column-1) {return;}
+			box3Column--;
+			$('#box3').animate({left: box3Left=sLeft+box3Column*40}, 200)
+		}
+		if (box4Row===steveRow && box4Column===steveColumn-1) {
+			if (row[steveRow][steveColumn-2]==='brick') {return;}
+			if (boxRow===box4Row && boxColumn===box4Column-1) {return;}
+			if (box2Row===box4Row && box2Column===box4Column-1) {return;}
+			if (box3Row===box4Row && box3Column===box4Column-1) {return;}
+			box4Column--;
+			$('#box4').animate({left: box4Left=sLeft+box4Column*40}, 200)
+		}
+		if (row[steveRow][steveColumn-1]!=='brick') {
+			if (boxRow===steveRow && boxColumn===steveColumn-1 && row[steveRow][steveColumn-2]==='brick') {
+				return;
+			}
+			if (box2Row===steveRow && box2Column===steveColumn-1 && row[steveRow][steveColumn-2]==='brick') {
+				return;
+			}
+			if (box3Row===steveRow && box3Column===steveColumn-1 && row[steveRow][steveColumn-2]==='brick') {
+				return;
+			}
+			if (box4Row===steveRow && box4Column===steveColumn-1 && row[steveRow][steveColumn-2]==='brick') {
+				return;
+			}
+			steveColumn--;
+			$('#steve').animate({left: steveLeft=sLeft+steveColumn*40}, 200)
+			gameWin();
+			boxOnPlace();
+		}
+	}
+	//top
+	if (e.which == 38 || e.which == 87) {
+		if (boxRow===steveRow-1 && boxColumn===steveColumn) {
+			if (row[steveRow-2][steveColumn]==='brick') {return;}
+			if (boxRow+1===box2Row && boxColumn===box2Column) {return;}
+			if (boxRow+1===box3Row && boxColumn===box3Column) {return;}
+			if (boxRow+1===box4Row && boxColumn===box4Column) {return;}
+			boxRow--;
+			$('#box').animate({top: boxTop=boxRow*40-40}, 200)
+		}
+		if (box2Row===steveRow-1 && box2Column===steveColumn) {
+			if (row[steveRow-2][steveColumn]==='brick') {return;}
+			if (boxRow+1===box2Row && boxColumn===box2Column) {return;}
+			if (box3Row+1===box2Row && box3Column===box2Column) {return;}
+			if (box4Row+1===box2Row && box4Column===box2Column) {return;}
+			box2Row--;
+			$('#box2').animate({top: box2Top=box2Row*40-40}, 200)
+		}
+		if (box3Row===steveRow-1 && box3Column===steveColumn) {
+			if (row[steveRow-2][steveColumn]==='brick') {return;}
+			if (boxRow+1===box3Row && boxColumn===box3Column) {return;}
+			if (box2Row+1===box3Row && box2Column===box3Column) {return;}
+			if (box4Row+1===box3Row && box4Column===box3Column) {return;}
+			box3Row--;
+			$('#box3').animate({top: box3Top=box3Row*40-40}, 200)
+		}
+		if (box4Row===steveRow-1 && box4Column===steveColumn) {
+			if (row[steveRow-2][steveColumn]==='brick') {return;}
+			if (boxRow+1===box4Row && boxColumn===box4Column) {return;}
+			if (box2Row+1===box4Row && box2Column===box4Column) {return;}
+			if (box3Row+1===box4Row && box3Column===box4Column) {return;}
+			box4Row--;
+			$('#box4').animate({top: box4Top=box4Row*40-40}, 200)
+		}
+		if (row[steveRow-1][steveColumn]!=='brick') {
+			if (boxRow===steveRow-1 && boxColumn===steveColumn && row[steveRow-2][steveColumn]==='brick') {
+				return;
+			}
+			if (box2Row===steveRow-1 && box2Column===steveColumn && row[steveRow-2][steveColumn]==='brick') {
+				return;
+			}
+			if (box3Row===steveRow-1 && box3Column===steveColumn && row[steveRow-2][steveColumn]==='brick') {
+				return;
+			}
+			if (box4Row===steveRow-1 && box4Column===steveColumn && row[steveRow-2][steveColumn]==='brick') {
+				return;
+			}
+			steveRow--;
+			$('#steve').animate({top: steveTop=steveRow*40+10-40}, 200)
+			gameWin();
+			boxOnPlace();
+		}
+	}
+	//right
+	if (e.which == 39 || e.which == 68) {
+		if (boxRow===steveRow && boxColumn===steveColumn+1) {
+			if (row[steveRow][steveColumn+2]==='brick') {return;}
+			if (boxRow===box2Row && boxColumn+1===box2Column) {return;}
+			if (boxRow===box3Row && boxColumn+1===box3Column) {return;}
+			if (boxRow===box4Row && boxColumn+1===box4Column) {return;}
+			boxColumn++;
+			$('#box').animate({left: boxLeft=sLeft+boxColumn*40}, 200)	
+		}
+		if (box2Row===steveRow && box2Column===steveColumn+1) {
+			if (row[steveRow][steveColumn+2]==='brick') {return;}
+			if (box3Row===box2Row && box3Column===box2Column+1) {return;}
+			if (boxRow===box2Row && boxColumn===box2Column+1) {return;}
+			if (box4Row===box2Row && box4Column===box2Column+1) {return;}
+			box2Column++;
+			$('#box2').animate({left: box2Left=sLeft+box2Column*40}, 200)
+		}
+		if (box3Row===steveRow && box3Column===steveColumn+1) {
+			if (row[steveRow][steveColumn+2]==='brick') {return;}
+			if (box2Row===box3Row && box2Column===box3Column+1) {return;}
+			if (boxRow===box3Row && boxColumn===box3Column+1) {return;}
+			if (box4Row===box3Row && box4Column===box3Column+1) {return;}
+			box3Column++;
+			$('#box3').animate({left: box3Left=sLeft+box3Column*40}, 200)
+		}
+		if (box4Row===steveRow && box4Column===steveColumn+1) {
+			if (row[steveRow][steveColumn+2]==='brick') {return;}
+			if (box2Row===box4Row && box2Column===box4Column+1) {return;}
+			if (boxRow===box4Row && boxColumn===box4Column+1) {return;}
+			if (box3Row===box4Row && box3Column===box4Column+1) {return;}
+			box4Column++;
+			$('#box4').animate({left: box4Left=sLeft+box4Column*40}, 200)
+		}
+		if (row[steveRow][steveColumn+1]!=='brick') {
+			if (boxRow===steveRow && boxColumn===steveColumn+1 && row[steveRow][steveColumn+2]==='brick') {
+				return;
+			}
+			if (box2Row===steveRow && box2Column===steveColumn+1 && row[steveRow][steveColumn+2]==='brick') {
+				return;
+			}
+			if (box3Row===steveRow && box3Column===steveColumn+1 && row[steveRow][steveColumn+2]==='brick') {
+				return;
+			}
+			if (box4Row===steveRow && box4Column===steveColumn+1 && row[steveRow][steveColumn+2]==='brick') {
+				return;
+			}
+			steveColumn++;
+			$('#steve').animate({left: steveLeft=sLeft+steveColumn*40}, 200)
+			gameWin();
+			boxOnPlace();
+		}
+	}
+	//down
+	if (e.which == 40 || e.which == 83) {
+		if (boxRow===steveRow+1 && boxColumn===steveColumn) {
+			if (row[steveRow+2][steveColumn]==='brick') {return;}
+			if (boxRow+1===box3Row && boxColumn===box3Column) {return;}
+			if (boxRow+1===box2Row && boxColumn===box2Column) {return;}
+			if (boxRow+1===box4Row && boxColumn===box4Column) {return;}
+			boxRow++;
+			$('#box').animate({top: boxTop=boxRow*40-40}, 200)
+		}
+		if (box2Row===steveRow+1 && box2Column===steveColumn) {
+			if (row[steveRow+2][steveColumn]==='brick') {return;}
+			if (box3Row===box2Row+1 && box3Column===box2Column) {return;}
+			if (boxRow===box2Row+1 && boxColumn===box2Column) {return;}
+			if (box4Row===box2Row+1 && box4Column===box2Column) {return;}
+			box2Row++;
+			$('#box2').animate({top: box2Top=box2Row*40-40}, 200)
+		}
+		if (box3Row===steveRow+1 && box3Column===steveColumn) {
+			if (row[steveRow+2][steveColumn]==='brick') {return;}
+			if (boxRow===box3Row+1 && boxColumn===box3Column) {return;}
+			if (box2Row===box3Row+1 && box2Column===box3Column) {return;}
+			if (box4Row===box3Row+1 && box4Column===box3Column) {return;}
+			box3Row++;
+			$('#box3').animate({top: box3Top=box3Row*40-40}, 200)
+		}
+		if (box4Row===steveRow+1 && box4Column===steveColumn) {
+			if (row[steveRow+2][steveColumn]==='brick') {return;}
+			if (boxRow===box4Row+1 && boxColumn===box4Column) {return;}
+			if (box2Row===box4Row+1 && box2Column===box4Column) {return;}
+			if (box3Row===box4Row+1 && box3Column===box4Column) {return;}
+			box4Row++;
+			$('#box4').animate({top: box4Top=box4Row*40-40}, 200)
+		}
+		if (row[steveRow+1][steveColumn]!=='brick') {
+			if (boxRow===steveRow+1 && boxColumn===steveColumn && row[steveRow+2][steveColumn]==='brick') {
+				return;
+			}
+			if (box2Row===steveRow+1 && box2Column===steveColumn && row[steveRow+2][steveColumn]==='brick') {
+				return;
+			}
+			if (box3Row===steveRow+1 && box3Column===steveColumn && row[steveRow+2][steveColumn]==='brick') {
+				return;
+			}
+			if (box4Row===steveRow+1 && box4Column===steveColumn && row[steveRow+2][steveColumn]==='brick') {
+				return;
+			}
+			steveRow++;
+			$('#steve').animate({top: steveTop=steveRow*40+10-40}, 200);
+			gameWin();
+			boxOnPlace();
+		}
+	}
+});
+
+function gameWin() {
+	if (row[steveRow][steveColumn]===null) {
+		level++;
+		$('#steve').animate({width: 0, top: steveTop=steveTop+10, left: steveLeft=steveLeft+20}, 500);
+		setTimeout(()=>alert('You win'), 700);
+		setTimeout(()=>startNewLevel(), 1000);
+	}
+}
+
+function boxOnPlace() {
+	if (row[boxRow][boxColumn]==='place') {
+		$('#box').css('opacity','1');
+		if (!box2Row && !box3Row && !box4Row) {
+			row[exitRow][exitColumn]=null;
+			$('[row = '+exitRow+'][column = '+exitColumn+']').css('opacity','0');
+		}
+	} else {
+		row[exitRow][exitColumn]='floor';
+		$('[row = '+exitRow+'][column = '+exitColumn+']').css('opacity','1');
+		$('#box').css('opacity','0.5')
+	}
+	if (box2Row && row[box2Row][box2Column]==='place') {
+		$('#box2').css('opacity','1');
+		if (!box3Row && !box4Row && row[boxRow][boxColumn]==='place') {
+			row[exitRow][exitColumn]=null;
+			$('[row = '+exitRow+'][column = '+exitColumn+']').css('opacity','0');
+		}
+	} else if (box2Row){
+		row[exitRow][exitColumn]='floor';
+		$('[row = '+exitRow+'][column = '+exitColumn+']').css('opacity','1');
+		$('#box2').css('opacity','0.5')
+	}
+	if (box3Row && row[box3Row][box3Column]==='place') {
+		$('#box3').css('opacity','1');
+		if (!box4Row && row[boxRow][boxColumn]==='place' && row[box2Row][box2Column]==='place') {
+			row[exitRow][exitColumn]=null;
+			$('[row = '+exitRow+'][column = '+exitColumn+']').css('opacity','0');
+		}
+	} else if (box3Row){
+		row[exitRow][exitColumn]='floor';
+		$('[row = '+exitRow+'][column = '+exitColumn+']').css('opacity','1');
+		$('#box3').css('opacity','0.5')
+	}
+	if (box4Row && row[box4Row][box4Column]==='place') {
+		$('#box4').css('opacity','1');
+		if (row[boxRow][boxColumn]==='place' && row[box2Row][box2Column]==='place' && row[box3Row][box3Column]==='place') {
+			row[exitRow][exitColumn]=null;
+			$('[row = '+exitRow+'][column = '+exitColumn+']').css('opacity','0');
+		}
+	} else if (box4Row){
+		row[exitRow][exitColumn]='floor';
+		$('[row = '+exitRow+'][column = '+exitColumn+']').css('opacity','1');
+		$('#box4').css('opacity','0.5')
+	}
+}
+
+$('#level1').click(function() {
+	level=1;
+	startNewLevel();
+});
+
+$('#level2').click(function() {
+	level=2;
+	startNewLevel();
+});
+
+$('#level3').click(function() {
+	level=3;
+	startNewLevel();
+});
+
+$('#level4').click(function() {
+	level=4;
+	startNewLevel();
+});
+
+$('#level5').click(function() {
+	level=5;
+	startNewLevel();
+});
+
+$('#level6').click(function() {
+	level=6;
+	startNewLevel();
+});
+
+$('#level7').click(function() {
+	level=7;
+	startNewLevel();
+});
+
+$('#level8').click(function() {
+	level=8;
+	startNewLevel();
+});
+</script>
+</html>

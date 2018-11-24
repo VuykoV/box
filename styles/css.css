@@ -1,0 +1,45 @@
+img {
+	position: absolute;
+}
+
+#circle {
+	background-image: url(https://staticmobly.akamaized.net/p/Arte-Quadro-Papel-de-Parede-3D-CC3ADrculos-EntrelaC3A7ados-Autocolante-6524-782364-1-zoom.jpg);
+	background-size: cover;
+	top: 10px;
+}
+
+#NightSky {
+	background-image: url(https://cdn.pixabay.com/photo/2017/08/24/03/41/milky-way-2675322_960_720.jpg);
+	background-size: cover;
+}
+
+#minecraft {
+	background-image: url(https://minecraftonly.ru/uploads/posts/2016-05/1463658227_1.jpg);
+	background-size: cover;
+}
+
+table {
+	border-spacing: 0;
+	padding: 0px;
+}
+
+#steve {
+	z-index: 100;
+}
+
+body {
+	background-image: url(https://minecraftonly.ru/uploads/posts/2016-05/1463658227_1.jpg);
+	background-size: cover;
+}
+
+.button-image-music {
+	margin-top: 5px;
+	right: 10px;
+	width: 60px;
+	height: 33px;
+}
+
+#box2,
+#box {
+	opacity: 0.5;
+}
